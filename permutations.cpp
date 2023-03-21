@@ -28,7 +28,7 @@ public:
         for(int i=pos; i<nums.size(); i++){
             swap(nums[pos],nums[i]);
             help(pos+1,nums,ans);
-            swap(nums[i],nums[pos]);
+            swap(nums[i],nums[pos]);   // baclktracking to neutralize the effect made by swap
         }
     }
 
