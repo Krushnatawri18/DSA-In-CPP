@@ -32,7 +32,7 @@ public:
             if(((num[i])) %2 != 0)
             return num;
             else
-            num.erase(i,1);
+            num.erase(i);
         }
         return "";   
     }
