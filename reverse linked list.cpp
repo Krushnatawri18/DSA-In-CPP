@@ -13,9 +13,6 @@ Example 3:
 Input: head = []
 Output: []
 
-Runtime 5 ms
-Memory 8.6 MB
-
 */
 
 /**
@@ -31,12 +28,12 @@ Memory 8.6 MB
 
 /*
 
-Recursion 1 :-
+Recursion :-
 Runtime - 7 ms
 Memory - 8.5 MB
 
 TC - O(N)
-SC - O(1)
+SC - O(N)
 
 */
 
@@ -72,6 +69,17 @@ public:
       
     }
 };
+
+/*
+
+Iteration :-
+Runtime - 5 ms
+Memory - 8.6 MB
+
+TC - O(N)
+SC - O(1)
+
+*/
 
 // Approach 2
 class Solution {
