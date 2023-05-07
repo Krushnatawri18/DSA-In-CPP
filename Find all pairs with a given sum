@@ -1,0 +1,65 @@
+/*
+Given two unsorted arrays A of size N and B of size M of distinct elements, the task is to find all pairs from both arrays whose sum is equal to X.
+
+Note: All pairs should be printed in increasing order of u. For eg. for two pairs (u1,v1) and (u2,v2), if u1 < u2 then
+(u1,v1) should be printed first else second.
+
+Example 1:
+Input:
+A[] = {1, 2, 4, 5, 7}
+B[] = {5, 6, 3, 4, 8} 
+X = 9 
+Output: 
+1 8
+4 5 
+5 4
+Explanation:
+(1, 8), (4, 5), (5, 4) are the pairs which sum to 9.
+
+Example 2:
+Input:
+A[] = {-1, -2, 4, -6, 5, 7}
+B[] = {6, 3, 4, 0} 
+X = 8 
+Output:
+4 4 
+5 3
+
+Runtime - 90 ms
+
+TC - O(N^2)
+SC - O(N)
+*/
+
+class Solution{
+    public:
+    vector<pair<int,int>> allPairs(int A[], int B[], int N, int M, int X)
+    {
+        // Your code goes here   
+        
+        //first sorting arrays 
+        sort(A, A + N);
+        sort(B, B + M);
+        
+        // creating a vector of pair of int 
+        vector<pair<int,int>>ans;
+        
+        int j;
+        for(int i = 0; i < N; i++)
+        {
+            // checking whether j reached at last position if yes, then break the loop and return the ans
+            if(j == M-1)
+            {
+                break;
+            }
+            for(j = 0; j < M; j++)
+            {
+                if(A[i] + B[j] == X)
+                {
+                    ans.push_back(make_pair(A[i],B[j]));
+                }
+            }
+        }
+    return ans;        
+    }
+};
