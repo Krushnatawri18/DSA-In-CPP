@@ -1,0 +1,46 @@
+/*
+Given an integer K and a queue of integers, we need to reverse the order of the first K elements of the queue, leaving the other elements in the same relative order.
+
+Example 1:
+Input:
+5 3
+1 2 3 4 5
+Output: 
+3 2 1 4 5
+
+TC - O(N)
+SC - O(K)
+*/
+
+queue<int> modifyQueue(queue<int> q, int k) {
+    // add code here.
+    
+    stack<int> s;
+    int n=q.size();
+    
+    // pushing first k elements to stack
+    for(int i=0; i<k; i++)
+    {
+        int element=q.front();
+        q.pop();
+        s.push(element);
+    }
+    
+    // pushing reversed k elements from stack to queue
+    for(int i=0; i<k; i++)
+    {
+        int element=s.top();
+        s.pop();
+        q.push(element);
+    }
+    
+    // popping out n-k elements from queue and pushing back to queue
+    for(int i=0; i<n-k; i++)
+    {
+        int element=q.front();
+        q.pop();
+        q.push(element);
+    }
+    
+    return q;
+}
