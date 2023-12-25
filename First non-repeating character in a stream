@@ -1,0 +1,67 @@
+/*
+Given an input stream A of n characters consisting only of lower case alphabets. While reading characters from the stream, you have to tell which character has appeared only once in the stream upto that point. If there are many characters that have appeared only once, you have to tell which one of them was the first one to appear. If there is no such character then append '#' to the answer.
+
+Example 1:
+Input: A = "aabc"
+Output: "a#bb"
+Explanation: 
+"a" - first non-repeating character is 'a'
+"aa" - no non-repeating character so '#'
+"aab" - first non-repeating character is 'b'
+"aabc" - there are two non repeating characters 'b' and 'c', 
+first non-repeating character is 'b' because 'b' comes before
+'c' in the stream.
+
+Example 2:
+Input: A = "zz"
+Output: "z#"
+Explanation: 
+"z" - first non-repeating character is 'z'
+"zz" - no non-repeating character so '#'
+
+TC - O(N)
+SC - O(N)
+*/
+
+class Solution {
+	public:
+		string FirstNonRepeating(string A){
+
+		    unordered_map<char, int> map;
+		    queue<int> q;
+		    string s="";
+		    
+		    for(int i=0; i<A.length(); i++){
+		        char ch=A[i];
+		        
+		        // increasing the count of character
+		        map[ch]++;
+		        
+		        // inserting character into the queue
+		        q.push(ch);
+		        
+		        // checking is character is repeating or not
+		        while(!q.empty()){
+		            // checking count of character
+		            
+		            // repeating character
+		            if(map[q.front()] > 1){
+		                q.pop();
+		            }
+		            
+		            // non-repeating character
+		            else{
+		                s.push_back(q.front());
+		                break;
+		            }
+		        }
+		        
+		        // if queue is empty insert '#'
+		        if(q.empty()){
+		            s.push_back('#');
+		        }
+		    }
+		    return s;
+		}
+
+};
