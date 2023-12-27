@@ -1,0 +1,35 @@
+/*
+Write a function that reverses a string. The input string is given as an array of characters s.
+You must do this by modifying the input array in-place with O(1) extra memory.
+
+Example 1:
+Input: s = ["h","e","l","l","o"]
+Output: ["o","l","l","e","h"]
+
+TC - O(N)
+SC - O(N)
+*/
+
+class Solution {
+public:
+    void reverseString(vector<char>& s) {
+        stack<char> st;
+
+        for(int i=0; i<s.size(); i++)
+        {
+            int ch=s[i];
+            st.push(ch);
+        }
+        s.clear();
+
+        while(!st.empty())
+        {
+            int ch=st.top();
+            s.push_back(ch);
+            st.pop();
+        }
+
+        return;
+
+    }
+};
