@@ -1,0 +1,58 @@
+/*
+You are given a stack St. You have to reverse the stack using recursion.
+
+Example 1:
+Input:
+St = {3,2,1,7,6}
+Output:
+{6,7,1,2,3}
+Explanation:
+Input stack after reversing will look like the stack in the output.
+
+TC - O(N^2)
+SC - O(N)
+*/
+
+class Solution{
+public:
+    void insertAtBottom(stack<int> &St, int num){
+        // function to insert every top element on bottom
+        
+        // base case
+        if(St.empty()){
+            St.push(num);
+            return ;
+        }
+        
+        // storing and popping the top element of stack
+        int n=St.top();
+        St.pop();
+        
+        // recursive call
+        insertAtBottom(St, num);
+        
+        St.push(n);
+        
+    }
+
+    void Reverse(stack<int> &St){
+        // just popping every element by side and calling insertAtBottom function to insert every top element on bottom
+        // every element of stack calling insertAtBottom function
+        
+        // base case
+        if(St.empty()){
+            return ;
+        }
+        
+        // storing and popping the top element of stack
+        int num=St.top();
+        St.pop();
+        
+        // recursive call
+        Reverse(St);
+        
+        // calling function to insert element at bottom
+        insertAtBottom(St, num);
+        
+    }
+};
