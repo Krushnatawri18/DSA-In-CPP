@@ -1,0 +1,44 @@
+/*
+You are given a stack St of N integers and an element X. You have to insert X at the bottom of the given stack. 
+
+Example 1:
+Input:
+N = 5
+X = 2
+St = {4,3,2,1,8}
+Output:
+{2,4,3,2,1,8}
+Explanation:
+After insertion of 2, the final stack will be {2,4,3,2,1,8}.
+
+TC - O(N)
+SC - O(N)
+*/
+
+class Solution{
+public:
+    void solve(stack<int> &St, int x){
+        
+        // base case
+        if(St.empty()){
+            St.push(x);
+            return;
+        }
+        
+        // storing and popping out the top element of stack
+        int num=St.top();
+        St.pop();
+        
+        // recursive call
+        solve(St, x);
+        
+        // pushing the stored top element
+        St.push(num);
+        
+    }
+
+    stack<int> insertAtBottom(stack<int> St,int X){
+        solve(St, X);
+        return St;
+    }
+};
