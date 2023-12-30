@@ -1,0 +1,57 @@
+/*
+Given an array of integers nums, sort the array in ascending order and return it.
+You must solve the problem without using any built-in functions in O(nlog(n)) time complexity and with the smallest space complexity possible.
+
+Example 1:
+Input: nums = [5,2,3,1]
+Output: [1,2,3,5]
+Explanation: After sorting the array, the positions of some numbers are not changed (for example, 2 and 3), while the positions of other numbers are changed (for example, 1 and 5).
+
+TC - O(N^2)
+SC - O(N)
+*/
+
+class Solution {
+public:
+    vector<int> insertElement(vector<int>& nums, int temp){
+
+        // base case
+        if(nums.size() == 0 || nums[nums.size() - 1] <= temp){
+            nums.push_back(temp);
+            return nums;
+        }
+
+        // popping out last element 
+        int n = nums[nums.size() - 1];
+        nums.pop_back();
+
+        // recursive call
+        insertElement(nums, temp);
+
+        // pushing the last element
+        nums.push_back(n);
+        return nums;
+
+    }
+
+    vector<int> sortArray(vector<int>& nums) {
+        
+        // base case
+        if(nums.size() == 1){
+            return nums;
+        }
+
+        // popping and storing out the last element
+        int temp = nums[nums.size() - 1];
+        nums.pop_back();
+
+        // recursive call
+        // for popping out all the elments
+        sortArray(nums);
+
+        // for pushing element at right index
+        vector<int> ans = insertElement(nums, temp);
+        return ans;
+
+    }
+};
