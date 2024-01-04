@@ -20,6 +20,7 @@ public:
         
         // base case
         if(St.empty()){
+            // pushing new element as last
             St.push(num);
             return ;
         }
@@ -30,7 +31,8 @@ public:
         
         // recursive call
         insertAtBottom(St, num);
-        
+
+        // pushing old element as top
         St.push(n);
         
     }
@@ -52,6 +54,7 @@ public:
         Reverse(St);
         
         // calling function to insert element at bottom
+        // pushing last element 
         insertAtBottom(St, num);
         
     }
