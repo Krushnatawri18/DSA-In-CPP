@@ -31,7 +31,7 @@ class Solution{
             // got smaller element than current element
             ans[i] = s.top();
             
-            // pushing that arr[i] element in stack to get smaller element for next element
+            // pushing that arr[i] element in stack to get smaller element for previous element
             s.push(current);
         }
         
