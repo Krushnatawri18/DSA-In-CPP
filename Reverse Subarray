@@ -1,0 +1,29 @@
+/*
+Given an array/list 'ARR' of integers and a position ‘M’. You have to reverse the array after that position.
+
+Example:
+We have an array ARR = {1, 2, 3, 4, 5, 6} and M = 3 , considering 0 
+based indexing so the subarray {5, 6} will be reversed and our 
+output array will be {1, 2, 3, 4, 6, 5}.
+
+TC - O(Q * K) => reversing K elements for each query Q
+SC - O(1)
+*/
+
+void reverseSubArray(vector<int> &arr, int m, int s, int e)
+{
+    while (s < e)
+    {
+        int temp = arr[s];
+        arr[s] = arr[e];
+        arr[e] = temp;
+        s++;
+        e--;
+    }
+}
+
+void reverseArray(vector<int> &arr , int m)
+{
+    int size = arr.size() - 1;
+    reverseSubArray(arr, m, m+1, size);
+}
