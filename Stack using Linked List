@@ -1,0 +1,76 @@
+/*
+class Node
+        {
+        public:
+            int data;
+            Node *next;
+            Node()
+            {
+                this->data = 0;
+                next = NULL;
+            }
+            Node(int data)
+            {
+                this->data = data;
+                this->next = NULL;
+            }
+            Node(int data, Node* next)
+            {
+                this->data = data;
+                this->next = next;
+            }
+        };
+
+TC - O(1) for each operation
+
+*/
+
+class Stack
+{
+    Node *top;
+    int size;
+
+public:
+    Stack()
+    {
+        top = NULL;
+        size = 0;
+    }
+
+    int getSize()
+    {
+        return size;
+    }
+
+    bool isEmpty()
+    {
+        return top == NULL;
+    }
+
+    void push(int data)
+    {
+        Node *ptr = new Node(data, top);
+        top = ptr;
+        size++;
+    }
+
+    void pop()
+    {
+        if(!isEmpty()){
+            Node *ptr = top;
+            top = top -> next;
+            delete ptr;
+            size--;
+        }
+    }
+
+    int getTop()
+    {
+        if(isEmpty()){
+            return -1;
+        }
+        return top -> data;
+    }
+};
+
+
