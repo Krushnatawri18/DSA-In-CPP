@@ -1,0 +1,54 @@
+/*
+Given an array Arr of size N, print second largest distinct element from an array.
+
+Example 1:
+Input: 
+N = 6
+Arr[] = {12, 35, 1, 10, 34, 1}
+Output: 34
+Explanation: The largest element of the 
+array is 35 and the second largest element
+is 34.
+
+TC - O(N)
+SC - O(1)
+*/
+
+class Solution{
+public:	
+	int print2largest(int arr[], int n) {
+	    if (n < 2) {
+            return -1; 
+        }
+
+        int largest = 0;
+        int secLargest = -1;
+        
+        // to find first largest element 
+        for(int i=1; i<n; i++){
+            if(arr[i] > arr[largest]){
+                largest = i;
+            }
+        }
+        
+        // to find second largest element
+        for(int i=0; i<n; i++){
+            
+            if(arr[i] != arr[largest]){
+                
+                if(secLargest == -1){
+                    secLargest = i;
+                }
+                else if(arr[i] >arr[secLargest]){
+                    secLargest = i;
+                } 
+            }   
+        }
+        
+        // if both are equal or secLargest = -1 that means array is having elements of same value
+        if(secLargest == largest || secLargest == -1){
+            return -1;
+        }  
+    return arr[secLargest];    
+	}
+};
