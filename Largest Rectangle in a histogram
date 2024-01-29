@@ -1,0 +1,84 @@
+/*
+You have been given an array/list 'HEIGHTS' of length ‘N. 'HEIGHTS' represents the histogram and each element of 'HEIGHTS' represents the height of the histogram bar. Consider that the width of each histogram is 1.
+You are supposed to return the area of the largest rectangle possible in the given histogram.
+
+For example :
+In the below histogram where array/list elements are {2, 1, 5, 6, 2, 3}.
+The area of largest rectangle possible in the given histogram is 10.
+
+TC - O(N)
+SC - O(N)
+*/
+
+ #include<stack>
+ #include <climits>
+
+ vector<int> nextSmallerElement(vector<int>& heights, int n){
+  vector<int> ans(n);
+  stack<int> s;
+  s.push(-1);
+
+  // finding next smaller element and storing its index as an upper bound
+  for(int i=n-1; i>=0; i--){
+    int curr = heights[i];
+
+    while(s.top() != -1 && heights[s.top()] >= curr){
+      s.pop();
+    }
+
+    ans[i] = s.top();
+    s.push(i);
+
+  }
+  return ans;
+
+ }
+
+ vector<int> prevSmallerElement(vector<int>& heights, int n){
+  vector<int> ans(n);
+  stack<int> s;
+  s.push(-1);
+
+  // finding previous smaller element and storing its index as lower bound
+  for(int i=0; i<n; i++){
+    int curr = heights[i];
+
+    while(s.top() != -1 && heights[s.top()] >= curr){
+      s.pop();
+    }
+
+    ans[i] = s.top();
+    s.push(i);
+
+  }
+  return ans;
+
+ }
+ 
+ int largestRectangle(vector < int > & heights) {
+  int n = heights.size();
+
+  vector<int> next(n) ;
+  next = nextSmallerElement(heights, n);
+
+  vector<int> prev(n);
+  prev = prevSmallerElement(heights, n);
+
+  int area = INT_MIN;
+
+  for(int i=0; i<n; i++){
+    int l = heights[i];
+    
+    // if rectangle is of same length then make upper bound equals to n
+    if(next[i] == -1){
+        next[i] = n;
+    }
+    
+    int b = next[i] - prev[i] - 1;
+    int newArea = l * b;
+    area = max(area, newArea);
+
+  }
+  return area;
+
+ }
