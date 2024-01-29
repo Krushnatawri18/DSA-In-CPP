@@ -1,0 +1,35 @@
+/*
+You are given a string 'STR'. You have to convert the first alphabet of each word in a string to UPPER CASE.
+
+Sample Input 1 :
+3
+I love programming
+they are playing cricket
+good to see you
+Sample Output 1 :
+I Love Programming
+They Are Playing Cricket
+Good To See You
+
+TC - O(N)
+SC - O(1)
+*/
+
+#include <bits/stdc++.h> 
+string convertString(string str) 
+{
+	int i=0;
+	while(i<str.length()){
+		if(i==0){
+			str[i]=toupper(str[i]);
+		}
+		if(str[i] == ' '){
+			i++;
+			str[i]=toupper(str[i]);
+		}
+		i++;
+
+	}
+
+	return str;
+}
