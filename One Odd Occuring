@@ -1,0 +1,23 @@
+/*
+Given an array ‘ARR’ of ‘N’ integers, where all the elements occur an even number of times and only one number occurs an odd number of times.
+Find and return the number which occurs an odd number of times.
+
+For example:
+'N' = 5, 'ARR' = [1, 2, 3, 2, 3]
+Output: 1
+Except for number 1, all numbers occur an even number of times.
+
+TC - O(N)
+SC - O(1)
+*/
+
+int missingNumber(int n, vector<int> &arr){
+   
+   int ans=0;
+   for(int i=0; i<n; i++){
+       ans ^= arr[i];
+   }
+
+    return ans;
+
+}
