@@ -1,0 +1,44 @@
+/*
+Write a program to find the total number of a primes number in a given interval.
+Given two integers S and E, count all primes between S and E.
+
+Sample Input 1 :
+2 10
+Sample Output 1 :
+4
+Explanation of Sample Input 1:
+The prime numbers between 2 and 10
+are 2,3,5 and 7
+
+TC - O((e-s+1).√i)
+SC - O(1)
+*/
+
+int totalPrime(int s, int e){
+    int count = 0;
+
+    for (int i = s; i <= e; i++) {
+        if (i == 2) {
+            count++;
+        } 
+        else {
+            int j = 2;
+            bool isPrime = true;
+
+            // finding sq root becoz prime number doesn't get divided by the numbers <= square root of number
+            while (j <= sqrt(i)) {
+                if (i % j == 0) {
+                    isPrime = false;
+                    break;
+                }
+                j++;
+            }
+
+            if (isPrime) {
+                count++;
+            }
+        }
+    }
+
+    return count;
+}
