@@ -1,0 +1,96 @@
+/*
+Design a data structure to implement ‘N’ stacks using a single array of size ‘S’. It should support the following operations:
+push(X, M): Pushes an element X into the Mth stack. Returns true if the element is pushed into the stack, otherwise false.
+pop(M): Pops the top element from Mth Stack. Returns -1 if the stack is empty, otherwise, returns the popped element.
+
+Two types of queries denote these operations :
+Type 1: for push(X, M) operation.
+Type 2: for pop(M) operation.
+
+TC - O(1)
+SC - O(s + n)
+*/
+
+class NStack
+{
+    int *arr;
+    int *top;
+    int *next;
+    int s, n, freespot; 
+    
+public:
+    NStack(int N, int S)
+    {
+        s=S;
+        n=N;
+        arr = new int[s];
+        top = new int[n];
+        next = new int[s];
+
+        // memset => setting same value to each element 
+        // top is of size N that gives index of top element of that stack
+        for(int i=0; i<n; i++){
+            top[i] = -1;
+        }
+
+        // next has two works to do:
+        // 1. if arr[i] stores any element then next points to next stack top element
+        // 2. else next points to next freespot data
+        for(int i=0; i<s; i++){
+            next[i] = i+1;
+        }
+
+        // setting next freespot data = -1 for last index as their is no freespot left
+        next[s-1] = -1;
+
+        // initial point
+        freespot = 0;
+    }
+
+    // Pushes 'X' into the Mth stack. Returns true if it gets pushed into the stack, and false otherwise.
+    bool push(int x, int m)
+    {
+        // overflow condition
+        if(freespot == -1){
+            return false;
+        }
+
+        // finding index to store
+        int index = freespot;
+
+        // updating/finding next freespot index
+        freespot = next[index];
+
+        // storing element
+        arr[index] = x;
+
+        // updating next[index] to index of stack top element
+        next[index] = top[m-1];
+
+        // updatimg index of stack top element to index(that's starting index of that stack in next)
+        top[m-1] = index;
+
+        return true;
+
+    }
+
+    // Pops top element from Mth Stack. Returns -1 if the stack is empty, otherwise returns the popped element.
+    int pop(int m)
+    {
+        // underflow condition
+        if(top[m-1] == -1){
+            return -1;
+        }
+
+        int index = top[m-1];
+
+        top[m-1] = next[index];
+
+        next[index] = freespot;
+
+        freespot = index;
+
+        return arr[index];
+
+    }
+};
