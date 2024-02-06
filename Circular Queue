@@ -1,0 +1,84 @@
+/*
+You will be given ‘Q’ queries. You need to implement a circular queue according to those queries. Each query will belong to one of these two types:
+
+1 ‘X’: Enqueue element ‘X’ into the end of the nth queue. 
+Returns true if the element is enqueued, otherwise false.
+
+2: Dequeue the element at the front of the nth queue. 
+Returns -1 if the queue is empty, otherwise, returns the dequeued element.
+
+TC - O(1) for each operation
+SC - O(N)
+*/
+
+#include <bits/stdc++.h> 
+class CircularQueue{
+
+    int *arr;
+    int size;
+    int front;
+    int rear;
+
+    public:
+
+    CircularQueue(int n){
+        size = n;
+        arr = new int[size];
+        front = rear = -1;
+    }
+
+    bool enqueue(int value){
+        // full condition
+        if((front == 0 && rear == size - 1) || (front != 0 && rear == (front - 1) % (size - 1))){
+            return false;
+        }
+        
+        // for first push operation
+        else if(front == -1){
+            front = rear = 0;
+        }
+
+        // to maintain cyclic nature 
+        else if(front != 0 && rear == size - 1){
+            rear = 0;
+        }
+
+        // normal push
+        else{
+            rear++;
+        }
+
+        // adding new value to queue
+        arr[rear] = value;
+        return true;
+    }
+
+    int dequeue(){
+        // empty condition
+        if(front == -1){
+            return -1;
+        }
+
+        // storing popped element from queue
+        int ans = arr[front];
+        arr[front] = -1;    
+
+        // if only one element is present    
+        if(front == rear){
+            front = rear = -1;
+        }
+
+        // to maintain the cyclic nature
+        else if(front == size - 1){
+            front = 0;
+        }
+
+        // normal pop
+        else{
+            front++;
+        }
+
+        // returning popped element
+        return ans;
+    }
+};
