@@ -12,6 +12,8 @@ TC - O(N)
 SC - O(N)
 */
 
+// Approach 1:-
+
 class Solution
 {
     public:
@@ -38,3 +40,24 @@ class Solution
         return q;
     }
 };
+
+// Approach 2:-
+
+#include <bits/stdc++.h> 
+
+void reverse(queue < int > & q) {
+    
+    if (q.empty()) {
+        return;
+    }
+
+    // just taking out top element until q gets empty
+    int element = q.front();
+    q.pop();
+
+    reverse(q);
+
+    // now pushing all the top elements in reverse order
+    q.push(element);
+    
+}
