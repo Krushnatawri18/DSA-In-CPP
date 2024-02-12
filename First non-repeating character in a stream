@@ -23,6 +23,8 @@ TC - O(N)
 SC - O(N)
 */
 
+// Approach 1:-
+
 class Solution {
 	public:
 		string FirstNonRepeating(string A){
@@ -62,6 +64,45 @@ class Solution {
 		        }
 		    }
 		    return s;
+		}
+
+};
+
+// Approach 2:-
+
+class Solution {
+	public:
+		string FirstNonRepeating(string A){
+		    
+		    queue<char> q;
+		    int arr[26] = {0};
+		    string s = "";
+		    
+		    for(int i=0; i<A.length(); i++){
+		        
+		        int position = A[i] - 'a';
+		        arr[position]++;
+		        
+		        q.push(A[i]);
+		        
+		        while(!q.empty()){
+		            
+		            if (arr[q.front() - 'a'] > 1) {
+                        q.pop();
+                    } 
+                    else {
+                        s.push_back(q.front());
+                        break;
+                     }
+		        }
+		        
+		        if(q.empty()){
+		            s.push_back('#');
+		        }
+	        
+		    }
+		    return s;
+		    
 		}
 
 };
