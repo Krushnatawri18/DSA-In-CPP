@@ -42,3 +42,25 @@ public:
         return ans;
     }
 };
+
+#include <bits/stdc++.h> 
+void interLeaveQueue(queue<int>& q) {
+    
+    queue<int> temp;
+    int size = q.size();
+    
+    // pushing first half to other queue
+    for(int i = 0; i < size / 2; i++) {
+        temp.push(q.front()); 
+        q.pop();
+    }
+
+    // now adding one element of main queue and then one element of temp queue
+    while (!temp.empty()) {
+        q.push(temp.front());
+        temp.pop();
+        q.push(q.front());
+        q.pop();
+    }
+}
+
