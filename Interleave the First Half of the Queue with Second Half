@@ -12,6 +12,8 @@ TC - O(N)
 SC - O(N)
 */
 
+// Approach 1:-
+
 class Solution{
 public:
     vector<int> rearrangeQueue(queue<int> &q){
@@ -64,3 +66,45 @@ void interLeaveQueue(queue<int>& q) {
     }
 }
 
+// Approach 2:- Using Stack
+
+#include <bits/stdc++.h> 
+void interLeaveQueue(queue<int>& q) {
+    
+    stack<int> s;
+    int size = q.size() / 2;
+
+    // pushing out first half of queue into stack => 3 4
+    for(int i=0; i<size; i++){
+        s.push(q.front());
+        q.pop();
+    }
+    
+    // pushing first half from stack into queue => 3 4 2 1
+    while(!s.empty()){
+        q.push(s.top());
+        s.pop();
+    }
+
+    // pushing out second half of queue into queue => 2 1 3 4
+    for(int i=0; i<size; i++){
+        q.push(q.front());
+        q.pop();
+    }
+
+    // pushing out first half of queue into stack => 3 4
+    for(int i=0; i<size; i++){
+        s.push(q.front());
+        q.pop();
+    }
+
+    // pushing first half elem into queue and 
+    // then second half elem into queue => 3 4 2 1
+    while(!s.empty()){
+        q.push(s.top());
+        s.pop();
+        q.push(q.front());
+        q.pop();
+    }
+
+}
