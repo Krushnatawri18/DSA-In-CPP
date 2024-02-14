@@ -1,0 +1,19 @@
+/*
+You are given an integer ‘N’ and a prime number ‘P’. Your task is to find the N! modulo P.
+
+TC - O(N)
+SC - O(1)
+*/
+
+#include <bits/stdc++.h> 
+int boringFactorials(int n, int p)
+{
+	int result = 1;
+
+	for(int i=1; i<=n; i++){
+		result = (result * i) % p;
+	}
+
+	return result;
+
+}
